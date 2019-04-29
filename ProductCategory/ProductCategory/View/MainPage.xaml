@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ProductCategory"
+             
+             xmlns:badge ="clr-namespace:Syncfusion.XForms.BadgeView;assembly=Syncfusion.SfBadgeView.XForms"
+             xmlns:NavigationDrawer="clr-namespace:Syncfusion.SfNavigationDrawer.XForms;assembly=Syncfusion.SfNavigationDrawer.XForms"
+             x:Class="ProductCategory.MainPage">
+
+
+    <NavigationDrawer:SfNavigationDrawer DrawerHeight="400" Transition="Push" DrawerHeaderHeight="0" DrawerFooterHeight="0"  BackgroundColor="Transparent" Position="Bottom">
+        <NavigationDrawer:SfNavigationDrawer.ContentView>
+            <ScrollView Orientation="Vertical">
+
+                <StackLayout BackgroundColor="#1A1163">
+
+
+                    <StackLayout Orientation="Vertical" >
+                        <Frame BorderColor="Black" Margin="5">
+                            <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Product Name : "/>
+                                    <Entry Text="{Binding ProductName}" HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Created Date : "/>
+                                    <DatePicker Date="{Binding CreatedDate}" HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <Picker ItemsSource="{Binding AvailableCategories}" SelectedItem="{Binding SelectedCategoryForProduct}"/>
+
+                                <Button Text="Submit Product" Command="{Binding SubmitProduct}"/>
+
+                            </StackLayout>
+                        </Frame>
+                        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="1" Margin="5,0" BackgroundColor="#000000" />
+                        <Frame BorderColor="Black" Margin="5">
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Category Name : "/>
+                                    <Entry Text="{Binding CategoryName}" HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Created Date : "/>
+                                    <DatePicker Date="{Binding CCreatedDate}" HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                                <Button Text="Submit Category" Command="{Binding SubmitCategory}"/>
+                            </StackLayout>
+                        </Frame>
+                        <BoxView HorizontalOptions="FillAndExpand" Margin="5,0" HeightRequest="1" BackgroundColor="#000000" />
+                        <Button Text="Show Selected Category Products" Command="{Binding ShowSelectedCategoryProducts}"/>
+                        <ListView HasUnevenRows="True" ItemsSource="{Binding SelectedCategoryForProdutcs}" BackgroundColor="#3DB6AC">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout>
+                                            <Label Text="{Binding ProductName}"/>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </NavigationDrawer:SfNavigationDrawer.ContentView>
+
+
+        <NavigationDrawer:SfNavigationDrawer.DrawerContentView>
+            <StackLayout Orientation="Horizontal">
+                <ListView ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Label Text="{Binding ProductName}"/>
+                                    <Label Text="{Binding CreatedDate}"/>
+                                    <Label Text="{Binding Pcategory.CategoryName}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <BoxView BackgroundColor="Black" WidthRequest="1"/>
+                <ListView ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Label Text="{Binding CategoryName}"/>
+                                    <Label Text="{Binding CreatedDate}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </StackLayout>
+        </NavigationDrawer:SfNavigationDrawer.DrawerContentView>
+    </NavigationDrawer:SfNavigationDrawer>
+</ContentPage>
